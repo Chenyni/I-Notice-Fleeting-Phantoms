@@ -1,12 +1,223 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <title>Welcome | I Notice Fleeting Phantoms</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>丰富的GitHub Pages示范页面</title>
+<style>
+  /* --- 全局样式 --- */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #fafafa;
+  }
+  h1, h3, p {
+    margin: 0;
+  }
+
+  /* --- 导航栏样式 --- */
+  nav {
+    background: linear-gradient(90deg, #4b6cb7, #182848);
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8em 1.2em;
+    color: white;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  nav .logo {
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1em;
+    margin: 0; padding: 0;
+  }
+  nav ul li {
+    cursor: pointer;
+    transition: text-decoration 0.3s;
+  }
+  nav ul li:hover {
+    text-decoration: underline;
+  }
+  .menu-toggle {
+    display: none;
+    cursor: pointer;
+    font-size: 1.8em;
+  }
+
+  /* 导航栏响应式 */
+  @media (max-width: 600px) {
+    nav ul {
+      display: none;
+      flex-direction: column;
+      background: #182848;
+      position: absolute;
+      top: 3.8em; right: 0;
+      width: 150px;
+      border-radius: 4px;
+    }
+    nav ul.show {
+      display: flex;
+    }
+    .menu-toggle {
+      display: block;
+    }
+  }
+
+  /* --- 欢迎横幅 --- */
+  .hero {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 1em;
+  }
+  .hero h1 {
+    font-size: 3em;
+    animation: fadeInDown 1s ease forwards;
+  }
+  .hero p {
+    font-size: 1.3em;
+    margin-top: 0.5em;
+    animation: fadeInUp 1.5s ease forwards;
+  }
+
+  @keyframes fadeInDown {
+    from {opacity: 0; transform: translateY(-50px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+  @keyframes fadeInUp {
+    from {opacity: 0; transform: translateY(50px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+
+  /* --- 作品卡片布局 --- */
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 2em 1em;
+    justify-content: center;
+    background: white;
+  }
+  .card {
+    background: #f3f4f6;
+    border-radius: 10px;
+    width: 280px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .card img {
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+  }
+  .card h3 {
+    margin-top: 0.7em;
+    margin-bottom: 0.3em;
+  }
+  .card p {
+    font-size: 0.95em;
+    color: #333;
+  }
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgb(0 0 0 / 0.2);
+  }
+
+  /* --- 回到顶部按钮 --- */
+  #backToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #4b6cb7;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    font-size: 24px;
+    display: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  }
+</style>
 </head>
-<body style="font-family:sans-serif;text-align:center;margin:2em;">
-  <h1>Hello / 你好 👋</h1>
-  <p>This is my bilingual GitHub Pages site.</p>
-  <p>这里是我用 GitHub Pages 搭建的中英文双语网站。</p>
+<body>
+
+<!-- === 导航栏部分 === -->
+<nav>
+  <div class="logo">MySite</div>
+  <ul id="nav-links">
+    <li>首页</li>
+    <li>作品集</li>
+    <li>博客</li>
+    <li>联系方式</li>
+  </ul>
+  <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+</nav>
+
+<!-- === 欢迎横幅部分 === -->
+<section class="hero">
+  <h1>欢迎来到我的个人网站</h1>
+  <p>探索我的项目和创意分享</p>
+</section>
+
+<!-- === 作品展示卡片部分 === -->
+<section class="cards-container">
+  <div class="card">
+    <img src="https://via.placeholder.com/280x160" alt="项目1" />
+    <h3>项目标题1</h3>
+    <p>项目简介文字，简洁说明项目内容和亮点。</p>
+  </div>
+  <div class="card">
+    <img src="https://via.placeholder.com/280x160" alt="项目2" />
+    <h3>项目标题2</h3>
+    <p>项目简介文字，简洁说明项目内容和亮点。</p>
+  </div>
+  <div class="card">
+    <img src="https://via.placeholder.com/280x160" alt="项目3" />
+    <h3>项目标题3</h3>
+    <p>项目简介文字，简洁说明项目内容和亮点。</p>
+  </div>
+</section>
+
+<!-- === 回到顶部按钮 === -->
+<button id="backToTop">↑</button>
+
+<script>
+  // 导航栏响应式菜单切换
+  const toggleBtn = document.getElementById('menu-toggle');
+  const navLinks = document.getElementById('nav-links');
+  toggleBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+  });
+
+  // 回到顶部按钮显示与点击事件
+  const backToTopBtn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 200) {
+      backToTopBtn.style.display = 'block';
+    } else {
+      backToTopBtn.style.display = 'none';
+    }
+  });
+
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+</script>
+
 </body>
 </html>
