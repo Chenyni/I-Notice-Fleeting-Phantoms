@@ -3,242 +3,182 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>欢迎来到我的精神世界 / Welcome to My Mindscape</title>
+<title>魔幻精神世界 | Mindscape Magic</title>
 <style>
-  /* --- 全局样式 --- */
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #fafafa;
-    color: #333;
+  /* --- 魔幻背景渐变＋星光 --- */
+  @keyframes starTwinkle {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 0.3; }
   }
-  h1, p {
+  body, html {
+    height: 100%;
     margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: radial-gradient(circle at center, #1a0033, #120021 90%);
+    overflow-x: hidden;
+    color: #eee;
+  }
+  /* 闪烁星星 */
+  .stars {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: transparent url('https://raw.githubusercontent.com/jackocnr/btnhover.css/master/stars.png') repeat;
+    background-size: cover;
+    pointer-events: none;
+    animation: starTwinkle 4s ease-in-out infinite;
+    z-index: 0;
   }
 
-  /* --- 导航栏 --- */
+  /* --- 顶部导航 --- */
   nav {
-    background: linear-gradient(90deg, #4b6cb7, #182848);
+    position: fixed;
+    top: 0; left: 0; right: 0;
     display: flex;
     justify-content: space-between;
-    padding: 0.8em 1.2em;
-    color: white;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    padding: 1em 2em;
+    background: rgba(10, 3, 50, 0.85);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 0 10px #8600ffaa;
+    z-index: 20;
   }
   nav .logo {
-    font-weight: bold;
-    font-size: 1.5em;
+    font-weight: 900;
+    font-size: 1.7em;
+    font-family: 'Cinzel Decorative', cursive;
+    color: #c47eff;
+    text-shadow: 0 0 10px #c47effaa;
   }
   nav ul {
     list-style: none;
     display: flex;
-    gap: 1em;
-    margin: 0; padding: 0;
+    gap: 1.8em;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: #a6a6ffcc;
   }
   nav ul li {
     cursor: pointer;
-    transition: text-decoration 0.3s;
+    transition: color 0.3s ease;
   }
   nav ul li:hover {
-    text-decoration: underline;
-  }
-  .menu-toggle {
-    display: none;
-    cursor: pointer;
-    font-size: 1.8em;
-  }
-  @media (max-width: 600px) {
-    nav ul {
-      display: none;
-      flex-direction: column;
-      background: #182848;
-      position: absolute;
-      top: 3.8em; right: 0;
-      width: 160px;
-      border-radius: 4px;
-    }
-    nav ul.show {
-      display: flex;
-    }
-    .menu-toggle {
-      display: block;
-    }
+    color: #c47eff;
+    text-shadow: 0 0 6px #c47effaa;
   }
 
-  /* --- 欢迎标语 --- */
-  .hero {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+  /* --- 双语切换按钮 --- */
+  #langToggle {
+    cursor: pointer;
+    background: linear-gradient(45deg, #9a4dff, #5419b8);
+    border: none;
     color: white;
-    height: 280px;
+    font-weight: 700;
+    padding: 0.5em 1.3em;
+    border-radius: 25px;
+    box-shadow: 0 0 8px #b180ffaa;
+    font-size: 1em;
+    transition: background 0.4s ease, box-shadow 0.4s ease;
+  }
+  #langToggle:hover {
+    background: linear-gradient(45deg, #b67eff, #8e3cff);
+    box-shadow: 0 0 15px #d0aaffcc;
+  }
+
+  /* --- 欢迎区 --- */
+  .hero {
+    margin-top: 5.2em;
+    min-height: 320px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 0 1em;
+    padding: 1em 2em;
+    font-family: 'Cinzel Decorative', cursive;
+    color: #d7bfff;
+    text-shadow: 0 0 10px #b685ffaa, 0 0 20px #d9b8ffcc;
   }
   .hero h1 {
-    font-size: 2.8em;
-    animation: fadeInDown 1s ease forwards;
-    line-height: 1.3;
+    font-size: 3.2em;
+    line-height: 1.2;
+    margin-bottom: 0.15em;
+    transition: color 0.5s;
   }
   .hero p {
-    font-size: 1.3em;
-    margin-top: 0.5em;
-    animation: fadeInUp 1.5s ease forwards;
+    font-size: 1.4em;
     font-weight: 500;
-  }
-  @keyframes fadeInDown {
-    from {opacity: 0; transform: translateY(-50px);}
-    to {opacity: 1; transform: translateY(0);}
-  }
-  @keyframes fadeInUp {
-    from {opacity: 0; transform: translateY(50px);}
-    to {opacity: 1; transform: translateY(0);}
+    color: #c4a8ffcc;
   }
 
-  /* --- 留言板 --- */
+  /* --- 留言板容器 --- */
   .comment-section {
-    max-width: 600px;
-    margin: 2em auto 4em auto;
-    background: white;
-    padding: 1.5em;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+    max-width: 700px;
+    margin: 3em auto 5em;
+    background: rgba(50, 10, 90, 0.85);
+    padding: 1.8em 2.5em;
+    border-radius: 18px;
+    box-shadow: 0 0 18px #9d78ffcc;
+    color: #ddd;
   }
   .comment-section h2 {
-    margin-bottom: 1em;
     text-align: center;
-    color: #4b6cb7;
+    font-family: 'Cinzel Decorative', cursive;
+    font-weight: 700;
+    font-size: 2em;
+    color: #d1b4ff;
+    margin-bottom: 1em;
+    text-shadow: 0 0 15px #b978ffdd;
   }
   textarea {
     width: 100%;
-    height: 80px;
-    padding: 0.7em;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    resize: vertical;
-    font-size: 1em;
-  }
-  button {
-    margin-top: 0.8em;
-    background-color: #4b6cb7;
-    color: white;
+    height: 100px;
+    padding: 1em;
+    border-radius: 14px;
     border: none;
-    padding: 0.6em 1.2em;
-    font-size: 1em;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    resize: vertical;
+    font-size: 1.1em;
+    font-family: inherit;
+    background: #3d196a;
+    color: #f0e7ff;
+    box-shadow: inset 0 0 10px #8a6ed8;
+    outline: none;
+    transition: box-shadow 0.3s ease;
   }
-  button:hover {
-    background-color: #364f9b;
+  textarea:focus {
+    box-shadow: inset 0 0 15px #bb98ff;
+  }
+  button#submitComment {
+    margin-top: 1em;
+    background: linear-gradient(135deg, #b185ff, #6b37ff);
+    border: none;
+    color: white;
+    font-weight: 700;
+    padding: 0.8em 2em;
+    font-size: 1.1em;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 0 12px #ad8fffcc;
+    transition: background 0.4s ease;
+  }
+  button#submitComment:hover {
+    background: linear-gradient(135deg, #d7b7ff, #9c4aff);
   }
   .comments-list {
-    margin-top: 1.5em;
-    max-height: 200px;
+    margin-top: 2em;
+    max-height: 240px;
     overflow-y: auto;
+    border-top: 1px solid #6f4cb9;
+    padding-top: 1em;
   }
   .comment-item {
-    background: #e1e8ff;
-    border-radius: 8px;
-    padding: 0.7em 1em;
-    margin-bottom: 0.7em;
-    white-space: pre-wrap;
-  }
+    background: #5a2f9c88;
+    padding: 0.8em 1em;
+    border-radius: 12px;
+    margin-bottom: 1em;
+    font-size: 1.05em;
+    font-weight: 500;
+    white-space: p
 
-  /* --- 回到顶部按钮 --- */
-  #backToTop {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background-color: #4b6cb7;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    cursor: pointer;
-    font-size: 24px;
-    display: none;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  }
-</style>
-</head>
-<body>
-
-<!-- 顶部导航栏 -->
-<nav>
-  <div class="logo">MySite</div>
-  <ul id="nav-links">
-    <li>首页 / Home</li>
-    <li>作品集 / Portfolio</li>
-    <li>博客 / Blog</li>
-    <li>联系方式 / Contact</li>
-  </ul>
-  <div class="menu-toggle" id="menu-toggle">&#9776;</div>
-</nav>
-
-<!-- 欢迎标语区域 -->
-<section class="hero">
-  <h1>欢迎来到我的精神世界<br />Welcome to My Mindscape</h1>
-  <p>分享我的思想与灵感 / Sharing My Thoughts & Inspirations</p>
-</section>
-
-<!-- 留言板区域 -->
-<section class="comment-section">
-  <h2>留言板 / Message Board</h2>
-  <textarea id="commentInput" placeholder="请输入你的留言 / Please enter your message"></textarea>
-  <button id="submitComment">提交留言 / Submit</button>
-  <div class="comments-list" id="commentsList"></div>
-</section>
-
-<!-- 回到顶部按钮 -->
-<button id="backToTop">↑</button>
-
-<script>
-  // 导航栏响应式菜单切换
-  const toggleBtn = document.getElementById('menu-toggle');
-  const navLinks = document.getElementById('nav-links');
-  toggleBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('show');
-  });
-
-  // 回到顶部按钮显示与点击事件
-  const backToTopBtn = document.getElementById('backToTop');
-  window.addEventListener('scroll', () => {
-    if(window.scrollY > 200) {
-      backToTopBtn.style.display = 'block';
-    } else {
-      backToTopBtn.style.display = 'none';
-    }
-  });
-  backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  });
-
-  // 留言板功能
-  const submitBtn = document.getElementById('submitComment');
-  const commentInput = document.getElementById('commentInput');
-  const commentsList = document.getElementById('commentsList');
-
-  submitBtn.addEventListener('click', () => {
-    const text = commentInput.value.trim();
-    if(text) {
-      const commentItem = document.createElement('div');
-      commentItem.className = 'comment-item';
-      commentItem.textContent = text;
-      commentsList.prepend(commentItem);
-      commentInput.value = '';
-    } else {
-      alert('请输入留言内容 / Please enter a message');
-    }
-  });
-</script>
-
-</body>
-</html>
